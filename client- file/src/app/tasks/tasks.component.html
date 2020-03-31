@@ -1,0 +1,85 @@
+<form class="form"
+  (submit)="add(todoTitle.value,todoDescription.value,tododueDate.value,todotime.value); todoTitle.value='';todoDescription.value='';tododueDate.value='';todotime.value='';todocompleted.value=''">
+  <div class="">
+    <span>
+      <input #todoTitle class="inputSection" placeholder="Todo Name" />
+      <input #todoDescription class="inputSection" placeholder="Todo description" />
+      <input #tododueDate class="inputSection" placeholder="Todo dueDate" />
+      <input #todotime class="inputSection" placeholder="Todo Time" />
+      <input type="submit" value="ADD" class="btn_sty" />
+     </span>
+  </div>
+  
+</form>
+<div class="dataholder">
+  <table class="table_todo">
+    <tr>
+      <td class="title_todo title_headerr">Title</td>
+      <td class="title_todo title_headerr">Content</td>
+      <td class="title_todo title_headerr">ID</td>
+      <td class="title_todo title_headerr">Created Date</td>
+      <td class="title_todo title_headerr">Modified Date</td>
+      <td class="title_todo title_headerr">Due Date</td>
+      <td class="title_todo title_headerr">Time</td>
+      <td class="title_todo title_headerr">completed</td>
+    </tr>
+    <tr class="table_rowStyle" *ngFor="let todo of todos">
+      <td class="title_todo">
+        <a (click)="edit(todo)">
+          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.title}}</span>
+          <input class="input_editoption" *ngIf="todo===editTodo" [(ngModel)]="todo.title" (keyup.enter)="update()">
+        </a>
+      </td>
+      <td #contentcell class="title_description">
+        <button id="{{'flag'+todo.id}}" (click)= "myFunction($event)">View</button>
+        <a (click)="edit(todo)" class="hidden_table">
+          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.content}}</span>
+          <input class="input_editoption" *ngIf="todo===editTodo" [(ngModel)]="todo.content" (keyup.enter)="update()">
+        </a>
+      </td>
+      <td class="title_dueDate">
+        <a (click)="edit(todo)">
+          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.id}}</span>
+          <input class="input_editoption" *ngIf="todo===editTodo" (keyup.enter)="update()">
+        </a>
+      </td>
+      <td class="title_time">
+        <a (click)="edit(todo)">
+          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.createdDate}}</span>
+          <input class="input_editoption" *ngIf="todo===editTodo" [(ngModel)]="todo.createdDate" (keyup.enter)="update()">
+        </a>
+      </td>
+      <td class="title_dueDate">
+        <a (click)="edit(todo)">
+          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.modifiedDate}}</span>
+          <input class="input_editoption" *ngIf="todo===editTodo" [(ngModel)]="todo.modifiedDate" (keyup.enter)="update()">
+        </a>
+      </td>
+      <td class="title_dueDate">
+        <a (click)="edit(todo)">
+          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.dueDate}}</span>
+          <input class="input_editoption" *ngIf="todo===editTodo" [(ngModel)]="todo.dueDate" (keyup.enter)="update()">
+        </a>
+      </td>
+      <td class="title_time">
+        <a (click)="edit(todo)">
+          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.time}}</span>
+          <input class="input_editoption" *ngIf="todo===editTodo" [(ngModel)]="todo.time" (keyup.enter)="update()">
+        </a>
+      </td>
+      <td class="title_completed">
+        <a (click)="edit(todo)">
+<!--          <span class="input_editoption" *ngIf="todo!==editTodo">{{todo.completedFlag}}</span>-->
+<!--          <input type="checkbox" class="input_editoption" [(ngModel)]="todo.completedFlag" *ngIf="todo!==editTodo"  />-->
+          <input type="checkbox" class="input_editoption" checked="todo===true" *ngIf="todo===editTodo" [(ngModel)]="todo.completedFlag" (keyup.enter)="update()" />
+        </a>
+      </td>
+      <td>
+        <button class="btn_sty btnEdit" (click)="update()">Update</button>
+        <button class="btn_sty btnDanger" title="delete todo" (click)="delete(todo)">Delete</button>
+        
+      </td>
+
+    </tr>
+  </table>
+</div>
